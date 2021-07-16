@@ -22,11 +22,29 @@ class technicianscreen extends StatelessWidget {
                   flex: 7,
                   child: Column(
                     children: [
-                       
+                       Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            
+            ElevatedButton.icon(
+              style: TextButton.styleFrom(
+                padding: EdgeInsets.symmetric(
+                  horizontal: defaultPadding * 1.5,
+                  vertical:
+                      defaultPadding / (Responsive.isMobile(context) ? 2 : 1),
+                ),
+              ),
+              onPressed: () {},
+              icon: Icon(Icons.add),
+              label: Text("Add New"),
+            ),
+          ],
+        ),
+        SizedBox(height: defaultPadding),
                       technicianfiles(),
                       if (Responsive.isMobile(context))
                         SizedBox(height: defaultPadding),
-                      if (Responsive.isMobile(context)) StarageDetails(),
+                      
                     ],
                   ),
                 ),

@@ -1,11 +1,6 @@
-
-
 import 'package:admin/models/clientfile.dart';
-import 'package:admin/models/facturefile.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
-
-
 import '../../../constants.dart';
 
 class clientfiles extends StatelessWidget {
@@ -25,7 +20,7 @@ class clientfiles extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Facture",
+            "Client",
             style: Theme.of(context).textTheme.subtitle1,
           ),
           SizedBox(
