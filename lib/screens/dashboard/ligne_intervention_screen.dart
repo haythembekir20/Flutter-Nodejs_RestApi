@@ -1,9 +1,10 @@
 import 'package:admin/responsive.dart';
+import 'package:admin/screens/dashboard/add/ligne_intervention_add.dart';
 import 'package:admin/screens/dashboard/components/ligne_intervention_file.dart';
 import 'package:flutter/material.dart';
 import '../../constants.dart';
 import 'components/header.dart';
-import 'components/storage_details.dart';
+
 
 class ligne_intervention_screen extends StatelessWidget {
   @override
@@ -34,9 +35,15 @@ class ligne_intervention_screen extends StatelessWidget {
                       defaultPadding / (Responsive.isMobile(context) ? 2 : 1),
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                    Navigator.push(context,
+      MaterialPageRoute(
+        builder:(context) => ligne_intervention_add(),
+        )
+        );
+              },
               icon: Icon(Icons.add),
-              label: Text("Add New"),
+              label: Text("Add New Ligne Intervention"),
             ),
           ],
         ),

@@ -1,19 +1,24 @@
 
 
 import 'package:admin/models/facturefile.dart';
+import 'package:admin/screens/dashboard/components/delete_button/facture_button.dart';
+import 'package:admin/service/facture_service.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 
 import '../../../constants.dart';
 
-class facturefiles extends StatelessWidget {
+class facturefiles extends ConsumerWidget {
   const facturefiles ({
     Key? key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+ Widget build(BuildContext context,watch) {
+     
+    final viewModel = watch(getDataFuture);
     return Container(
       padding: EdgeInsets.all(defaultPadding),
       decoration: BoxDecoration(
@@ -33,9 +38,7 @@ class facturefiles extends StatelessWidget {
               columnSpacing: defaultPadding,
               minWidth: 600,
               columns: [
-                DataColumn(
-                  label: Text("idfacture"),
-                ),
+                
                 DataColumn(
                   label: Text("date_envoie"),
                 ),
@@ -60,11 +63,14 @@ class facturefiles extends StatelessWidget {
                  DataColumn(
                   label: Text("a_payer"),
                 ),
+                DataColumn(
+                  label: Text("Delete"),
+                ),
                 
               ],
               rows: List.generate(
-                demofacturefile.length,
-                (index) => factureFileDataRow(demofacturefile[index]),
+                viewModel.demofacturefile.length,
+                (index) => factureFileDataRow(viewModel.demofacturefile[index]),
               ),
             ),
           ),
@@ -77,7 +83,7 @@ class facturefiles extends StatelessWidget {
 DataRow factureFileDataRow(facturefile fileInfo) {
   return DataRow(
     cells: [
-     DataCell(Text(fileInfo.idfacture!)),
+     //DataCell(Text(fileInfo.idfacture!)),
       DataCell(Text(fileInfo.date_envoie!)),
       DataCell(Text(fileInfo.date_paiement!)),
        DataCell(Text(fileInfo.modalite!)),
@@ -86,6 +92,10 @@ DataRow factureFileDataRow(facturefile fileInfo) {
        DataCell(Text(fileInfo.tva!)),
        DataCell(Text(fileInfo.remise!)),
        DataCell(Text(fileInfo.a_payer!)),
+       DataCell(new RButton(
+                          //id: ,// bid variable increments by 1 every t
+                         id: fileInfo.id!
+                        ))
        
     ],
   );

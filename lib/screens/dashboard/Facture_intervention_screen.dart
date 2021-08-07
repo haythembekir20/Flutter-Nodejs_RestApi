@@ -1,4 +1,5 @@
 import 'package:admin/responsive.dart';
+import 'package:admin/screens/dashboard/add/Facture_intervention_add.dart';
 import 'package:admin/screens/dashboard/components/Facture_intervention_files.dart';
 import 'package:flutter/material.dart';
 import '../../constants.dart';
@@ -34,9 +35,15 @@ class Facture_intervention_screen extends StatelessWidget {
                       defaultPadding / (Responsive.isMobile(context) ? 2 : 1),
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context,
+      MaterialPageRoute(
+        builder:(context) => Facture_intervention_add(),
+        )
+        );
+              },
               icon: Icon(Icons.add),
-              label: Text("Add New"),
+              label: Text("Add New Facture Intervention"),
             ),
           ],
         ),

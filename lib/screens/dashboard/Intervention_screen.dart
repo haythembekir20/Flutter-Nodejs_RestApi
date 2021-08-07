@@ -1,4 +1,5 @@
 import 'package:admin/responsive.dart';
+import 'package:admin/screens/dashboard/add/intervention_add.dart';
 import 'package:admin/screens/dashboard/components/intervention_File.dart';
 import 'package:flutter/material.dart';
 import '../../constants.dart';
@@ -34,9 +35,15 @@ class Interventionscreen extends StatelessWidget {
                       defaultPadding / (Responsive.isMobile(context) ? 2 : 1),
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                  Navigator.push(context,
+      MaterialPageRoute(
+        builder:(context) => intervention_add(),
+        )
+        );
+              },
               icon: Icon(Icons.add),
-              label: Text("Add New"),
+              label: Text("Add New Intervention"),
             ),
           ],
         ),

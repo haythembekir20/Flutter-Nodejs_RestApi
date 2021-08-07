@@ -1,25 +1,38 @@
 
 
 import 'package:admin/models/ligne_facturefile.dart';
+import 'package:admin/service/ligne_facture_service.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 
 import '../../../constants.dart';
+import 'delete_button/ligne_facture_rbutton.dart';
 
-class ligne_facturefiles extends StatelessWidget {
+class ligne_facturefiles extends ConsumerWidget {
   const ligne_facturefiles ({
     Key? key,
   }) : super(key: key);
 
+
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,watch) {
+     
+    final viewModel = watch(getDataFuture);
+    
+ 
+
+    
     return Container(
+      
       padding: EdgeInsets.all(defaultPadding),
       decoration: BoxDecoration(
         color: secondaryColor,
         borderRadius: const BorderRadius.all(Radius.circular(10)),
       ),
+      
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -33,21 +46,27 @@ class ligne_facturefiles extends StatelessWidget {
               columnSpacing: defaultPadding,
               minWidth: 600,
               columns: [
-                DataColumn(
+               /* DataColumn(
                   label: Text("idligne"),
                 ),
+                */
                 DataColumn(
                   label: Text("idligne"),
                 ),
                 DataColumn(
                   label: Text("description"),
                 ),
-               
+               DataColumn(
+                  label: Text("Delete"),
+                ),
               ],
+              
               rows: List.generate(
-                demoligne_facturefile.length,
-                (index) => ligne_factureFileDataRow(demoligne_facturefile[index]),
+                viewModel.listDataModel.length,
+                (index) => ligne_factureFileDataRow(viewModel.listDataModel[index]),
+               
               ),
+              
             ),
           ),
         ],
@@ -56,13 +75,18 @@ class ligne_facturefiles extends StatelessWidget {
   }
 }
 
+
 DataRow ligne_factureFileDataRow(ligne_facturefile fileInfo) {
   return DataRow(
     cells: [
-     DataCell(Text(fileInfo.idligne!)),
+      
+    // DataCell(Text(int(fileInfo.id))),
       DataCell(Text(fileInfo.idfacture!)),
       DataCell(Text(fileInfo.description!)),
-      
+       DataCell(new RButton(
+                          //id: ,// bid variable increments by 1 every t
+                         id: fileInfo.id!
+                        ))
     ],
   );
 }

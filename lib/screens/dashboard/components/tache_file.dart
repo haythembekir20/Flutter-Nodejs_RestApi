@@ -1,18 +1,23 @@
 
 import 'package:admin/models/tacheFile.dart';
+import 'package:admin/screens/dashboard/components/delete_button/tache_button.dart';
+import 'package:admin/service/tache_service.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 
 import '../../../constants.dart';
 
-class tacheFiles extends StatelessWidget {
+class tacheFiles extends ConsumerWidget {
   const tacheFiles ({
     Key? key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+ Widget build(BuildContext context,watch) {
+     
+    final viewModel = watch(getDataFuture);
     return Container(
       padding: EdgeInsets.all(defaultPadding),
       decoration: BoxDecoration(
@@ -32,9 +37,7 @@ class tacheFiles extends StatelessWidget {
               columnSpacing: defaultPadding,
               minWidth: 600,
               columns: [
-                DataColumn(
-                  label: Text("idTache"),
-                ),
+               
                 DataColumn(
                   label: Text("id_Client"),
                 ),
@@ -62,10 +65,13 @@ class tacheFiles extends StatelessWidget {
                  DataColumn(
                   label: Text("travaux"),
                 ),
+                 DataColumn(
+                  label: Text("delete"),
+                ),
               ],
               rows: List.generate(
-                demotacheFiles.length,
-                (index) => tacheFileDataRow(demotacheFiles[index]),
+                viewModel.demotacheFiles.length,
+                (index) => tacheFileDataRow(viewModel.demotacheFiles[index]),
               ),
             ),
           ),
@@ -78,7 +84,7 @@ class tacheFiles extends StatelessWidget {
 DataRow tacheFileDataRow(tacheFile fileInfo) {
   return DataRow(
     cells: [
-     DataCell(Text(fileInfo.idTache!)),
+    // DataCell(Text(fileInfo.idTache!)),
       DataCell(Text(fileInfo.id_Client!)),
       DataCell(Text(fileInfo.id_tech!)),
        DataCell(Text(fileInfo.etat!)),
@@ -88,7 +94,10 @@ DataRow tacheFileDataRow(tacheFile fileInfo) {
        DataCell(Text(fileInfo.plomberie!)),
        DataCell(Text(fileInfo.livraison!)),
        DataCell(Text(fileInfo.travaux!)),
-
+       DataCell(new RButton(
+                          //id: ,// bid variable increments by 1 every t
+                         id: fileInfo.id!
+                        ))
     ],
   );
 }

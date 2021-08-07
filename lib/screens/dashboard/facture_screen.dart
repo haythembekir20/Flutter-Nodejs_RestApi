@@ -1,12 +1,11 @@
 import 'package:admin/responsive.dart';
+import 'package:admin/screens/dashboard/add/facture_add.dart';
 import 'package:admin/screens/dashboard/components/facture_file.dart';
 
 import 'package:flutter/material.dart';
 
 import '../../constants.dart';
 import 'components/header.dart';
-
-import 'components/storage_details.dart';
 
 class Facture_screen extends StatelessWidget {
   @override
@@ -37,9 +36,15 @@ class Facture_screen extends StatelessWidget {
                       defaultPadding / (Responsive.isMobile(context) ? 2 : 1),
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                  Navigator.push(context,
+      MaterialPageRoute(
+        builder:(context) => facture_add(),
+        )
+                  );
+              },
               icon: Icon(Icons.add),
-              label: Text("Add New"),
+              label: Text("Add New Facture"),
             ),
           ],
         ),

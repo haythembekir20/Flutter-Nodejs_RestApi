@@ -1,18 +1,23 @@
-import 'package:admin/models/clientfile.dart';
+
 import 'package:admin/models/technicianfile.dart';
+import 'package:admin/screens/dashboard/components/delete_button/technician_button.dart';
+import 'package:admin/service/technicain_service.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 
 import '../../../constants.dart';
 
-class technicianfiles extends StatelessWidget {
+class technicianfiles extends ConsumerWidget {
   const technicianfiles ({
     Key? key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,watch) {
+     
+    final viewModel = watch(getDataFuture);
     return Container(
       padding: EdgeInsets.all(defaultPadding),
       decoration: BoxDecoration(
@@ -32,18 +37,18 @@ class technicianfiles extends StatelessWidget {
               columnSpacing: defaultPadding,
               minWidth: 600,
               columns: [
-                DataColumn(
-                  label: Text("idtech"),
-                ),
+                
                 DataColumn(
                   label: Text("nom"),
                 ),
+                
                 DataColumn(
                   label: Text("prenom"),
                 ),
                 DataColumn(
                   label: Text("email"),
                 ),
+                
                 DataColumn(
                   label: Text("tel"),
                 ),
@@ -57,18 +62,21 @@ class technicianfiles extends StatelessWidget {
                   label: Text("login"),
                 ),
                  DataColumn(
-                  label: Text("pwd"),
+                  label: Text("mdp"),
                 ),
                   DataColumn(
                   label: Text("dern_cnx"),
+                ),
+                 DataColumn(
+                  label: Text("Delete"),
                 ),
                
                 
                 
               ],
               rows: List.generate(
-                demotechnicianfile.length,
-                (index) => technicianfileDataRow(demotechnicianfile[index]),
+                viewModel.demotechnicianfile.length,
+                (index) => technicianfileDataRow(viewModel.demotechnicianfile[index]),
               ),
             ),
           ),
@@ -81,17 +89,23 @@ class technicianfiles extends StatelessWidget {
 DataRow technicianfileDataRow(technicianfile fileInfo) {
   return DataRow(
     cells: [
-     DataCell(Text(fileInfo.idtech!)),
+     //DataCell(Text(fileInfo.idtech!)),
+     
       DataCell(Text(fileInfo.nom!)),
+      
       DataCell(Text(fileInfo.prenom!)),
        DataCell(Text(fileInfo.email!)),
+       
        DataCell(Text(fileInfo.tel!)),
        DataCell(Text(fileInfo.adresse!)),
        DataCell(Text(fileInfo.descativer!)),
        DataCell(Text(fileInfo.login!)),
-       DataCell(Text(fileInfo.pwd!)),
+       DataCell(Text(fileInfo.mdp!)),
          DataCell(Text(fileInfo.dern_cnx!)),
-      
+      DataCell(new RButton(
+                          //id: ,// bid variable increments by 1 every t
+                         id: fileInfo.id!
+                        ))
        
     ],
   );

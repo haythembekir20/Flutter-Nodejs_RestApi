@@ -1,13 +1,9 @@
 import 'package:admin/responsive.dart';
-import 'package:admin/screens/dashboard/components/facture_file.dart';
+import 'package:admin/screens/dashboard/add/ligne_facture_add.dart';
 import 'package:admin/screens/dashboard/components/ligne_facture_file.dart';
-
 import 'package:flutter/material.dart';
-
 import '../../constants.dart';
 import 'components/header.dart';
-
-import 'components/storage_details.dart';
 
 class ligne_facture_screen extends StatelessWidget {
   @override
@@ -38,9 +34,15 @@ class ligne_facture_screen extends StatelessWidget {
                       defaultPadding / (Responsive.isMobile(context) ? 2 : 1),
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                  Navigator.push(context,
+      MaterialPageRoute(
+        builder:(context) => ligne_facture_add(),
+        )
+        );
+              },
               icon: Icon(Icons.add),
-              label: Text("Add New"),
+              label: Text("Add New Ligne Facture"),
             ),
           ],
         ),

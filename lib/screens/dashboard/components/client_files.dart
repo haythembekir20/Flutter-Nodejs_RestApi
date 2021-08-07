@@ -1,15 +1,20 @@
 import 'package:admin/models/clientfile.dart';
+import 'package:admin/screens/dashboard/components/delete_button/client_button.dart';
+import 'package:admin/service/client_service.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../constants.dart';
 
-class clientfiles extends StatelessWidget {
+class clientfiles extends ConsumerWidget {
   const clientfiles ({
     Key? key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,watch) {
+     
+    final viewModel = watch(getDataFuture);
     return Container(
       padding: EdgeInsets.all(defaultPadding),
       decoration: BoxDecoration(
@@ -29,9 +34,7 @@ class clientfiles extends StatelessWidget {
               columnSpacing: defaultPadding,
               minWidth: 600,
               columns: [
-                DataColumn(
-                  label: Text("idclient"),
-                ),
+               
                 DataColumn(
                   label: Text("nom"),
                 ),
@@ -47,9 +50,7 @@ class clientfiles extends StatelessWidget {
                 DataColumn(
                   label: Text("adresse"),
                 ),
-                 DataColumn(
-                  label: Text("descativer"),
-                ),
+               
                  DataColumn(
                   label: Text("login"),
                 ),
@@ -59,18 +60,19 @@ class clientfiles extends StatelessWidget {
                   DataColumn(
                   label: Text("siteweb"),
                 ),
-                 DataColumn(
-                  label: Text("num_tva"),
-                ),
+                
                  DataColumn(
                   label: Text("raison"),
+                ),
+                DataColumn(
+                  label: Text("Delete"),
                 ),
                 
                 
               ],
               rows: List.generate(
-                democlientfile.length,
-                (index) => clientfileDataRow(democlientfile[index]),
+                viewModel.democlientfile.length,
+                (index) => clientfileDataRow(viewModel.democlientfile[index]),
               ),
             ),
           ),
@@ -83,19 +85,22 @@ class clientfiles extends StatelessWidget {
 DataRow clientfileDataRow(clientfile fileInfo) {
   return DataRow(
     cells: [
-     DataCell(Text(fileInfo.idclient!)),
+    // DataCell(Text(fileInfo.idclient!)),
       DataCell(Text(fileInfo.nom!)),
       DataCell(Text(fileInfo.prenom!)),
        DataCell(Text(fileInfo.email!)),
        DataCell(Text(fileInfo.tel!)),
        DataCell(Text(fileInfo.adresse!)),
-       DataCell(Text(fileInfo.descativer!)),
+      // DataCell(Text(fileInfo.desactiver!)),
        DataCell(Text(fileInfo.login!)),
-       DataCell(Text(fileInfo.pwd!)),
+       DataCell(Text(fileInfo.mdp!)),
          DataCell(Text(fileInfo.siteweb!)),
-       DataCell(Text(fileInfo.num_tva!)),
+       //DataCell(Text(fileInfo.num_tva!)),
        DataCell(Text(fileInfo.raison!)),
-       
+        DataCell(new RButton(
+                          //id: ,// bid variable increments by 1 every t
+                         id: fileInfo.id!
+                        ))
     ],
   );
 }

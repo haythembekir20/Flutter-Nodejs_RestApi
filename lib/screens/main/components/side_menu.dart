@@ -6,6 +6,7 @@ import 'package:admin/screens/main/ligne_facture.dart';
 import 'package:admin/screens/main/ligne_intervention.dart';
 import 'package:admin/screens/main/tache.dart';
 import 'package:admin/screens/main/technician.dart';
+import 'package:admin/service/ligne_facture_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -86,6 +87,7 @@ class SideMenu extends StatelessWidget {
             title: "Ligne_Facture",
             svgSrc: "assets/icons/menu_store.svg",
             press: () {
+              GetDataFromApi();
                Navigator.push(context,
       MaterialPageRoute(
         builder:(context) => ligne_facture_main(),

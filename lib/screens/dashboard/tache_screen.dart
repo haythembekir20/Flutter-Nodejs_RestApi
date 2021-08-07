@@ -1,4 +1,5 @@
 import 'package:admin/responsive.dart';
+import 'package:admin/screens/dashboard/add/tache_add.dart';
 import 'package:admin/screens/dashboard/components/intervention_File.dart';
 import 'package:admin/screens/dashboard/components/tache_file.dart';
 import 'package:flutter/material.dart';
@@ -37,9 +38,15 @@ class Tachescreen extends StatelessWidget {
                       defaultPadding / (Responsive.isMobile(context) ? 2 : 1),
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                 Navigator.push(context,
+      MaterialPageRoute(
+        builder:(context) => tache_add(),
+        )
+        );
+              },
               icon: Icon(Icons.add),
-              label: Text("Add New"),
+              label: Text("Add New Tache"),
             ),
           ],
         ),

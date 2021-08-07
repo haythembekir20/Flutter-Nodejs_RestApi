@@ -1,9 +1,11 @@
+import 'package:admin/models/adminfile.dart';
 import 'package:admin/responsive.dart';
+import 'package:admin/screens/dashboard/add/admin_add.dart';
 import 'package:admin/screens/dashboard/components/adminfiles.dart';
 import 'package:flutter/material.dart';
 import '../../constants.dart';
 import 'components/header.dart';
-import 'components/storage_details.dart';
+
 
 class adminscreen extends StatelessWidget {
   @override
@@ -34,9 +36,15 @@ class adminscreen extends StatelessWidget {
                       defaultPadding / (Responsive.isMobile(context) ? 2 : 1),
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                 Navigator.push(context,
+      MaterialPageRoute(
+        builder:(context) => admin_add(),
+        )
+        );
+              },
               icon: Icon(Icons.add),
-              label: Text("Add New"),
+              label: Text("Add New Admin"),
             ),
           ],
         ),

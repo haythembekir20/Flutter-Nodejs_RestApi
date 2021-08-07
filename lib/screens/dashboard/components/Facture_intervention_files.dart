@@ -1,19 +1,24 @@
 
 import 'package:admin/models/Facture_intervention.dart';
 import 'package:admin/models/interventionFile.dart';
+import 'package:admin/screens/dashboard/components/delete_button/facture_intervention.dart';
+import 'package:admin/service/facture_intervention_service.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../constants.dart';
 
-class Facture_intervention_files extends StatelessWidget {
+class Facture_intervention_files extends ConsumerWidget {
   const Facture_intervention_files ({
     Key? key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+   Widget build(BuildContext context,watch) {
+     
+    final viewModel = watch(getDataFuture);
     return Container(
       padding: EdgeInsets.all(defaultPadding),
       decoration: BoxDecoration(
@@ -37,13 +42,16 @@ class Facture_intervention_files extends StatelessWidget {
                   label: Text("id_inter"),
                 ),
                 DataColumn(
-                  label: Text("facture"),
+                  label: Text("id_facture"),
+                ),
+                DataColumn(
+                  label: Text("Delete"),
                 ),
                
               ],
               rows: List.generate(
-                demoFacture_interventionfile.length,
-                (index) => Facture_interventionDataRow(demoFacture_interventionfile[index]),
+                viewModel.demoFacture_interventionfile.length,
+                (index) => Facture_interventionDataRow(viewModel.demoFacture_interventionfile[index]),
               ),
             ),
           ),
@@ -56,9 +64,12 @@ class Facture_intervention_files extends StatelessWidget {
 DataRow Facture_interventionDataRow(Facture_interventionfile fileInfo) {
   return DataRow(
     cells: [
-     DataCell(Text(fileInfo.idinter!)),
-      DataCell(Text(fileInfo.idfacture!)),
-     
+     DataCell(Text(fileInfo.id_inter!)),
+      DataCell(Text(fileInfo.id_facture!)),
+     DataCell(new RButton(
+                          //id: ,// bid variable increments by 1 every t
+                         id: fileInfo.id!
+                        ))
     ],
   );
 }
